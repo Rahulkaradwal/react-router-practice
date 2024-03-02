@@ -11,7 +11,7 @@ export async function getData() {
 
 export async function getDatabyId({ request, params }) {
   const id = params.eventId;
-  const res = await fetch('http://localhost:8080/events' + id);
+  const res = await fetch('http://localhost:8080/events/' + id);
   if (!res.ok) {
     throw json(
       { message: 'Could not fetch details for seleced event' },
