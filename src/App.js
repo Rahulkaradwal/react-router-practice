@@ -28,20 +28,28 @@ const router = createBrowserRouter([
             element: <EventsPage />,
             loader: getData,
           },
-
           {
             path: ':eventId',
-            element: <EventDetailPage />,
+            // element: <EventDetailPage />,
+            id: 'eventIdLoader',
             loader: getDatabyId,
+            children: [
+              {
+                index: true,
+                element: <EventDetailPage />,
+                // loader: getDatabyId,
+              },
+              {
+                path: 'edit',
+                element: <EditEventPage />,
+                // loader: getDatabyId,
+              },
+            ],
           },
+
           {
             path: 'new',
             element: <NewEventPage />,
-          },
-          {
-            path: ':eventId/edit',
-            element: <EditEventPage />,
-            loader: getDatabyId,
           },
         ],
       },
