@@ -7,8 +7,7 @@ import HomePage from './pages/HomePage';
 import RootLayout from './pages/RootLayout';
 import EventsRoot from './pages/EventsRoot';
 import Error from './components/Error';
-import { getData, getDatabyId } from './http/dataRequests';
-
+import { getData, getDatabyId, sendData } from './http/dataRequests';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -30,19 +29,16 @@ const router = createBrowserRouter([
           },
           {
             path: ':eventId',
-            // element: <EventDetailPage />,
             id: 'eventIdLoader',
             loader: getDatabyId,
             children: [
               {
                 index: true,
                 element: <EventDetailPage />,
-                // loader: getDatabyId,
               },
               {
                 path: 'edit',
                 element: <EditEventPage />,
-                // loader: getDatabyId,
               },
             ],
           },
@@ -50,6 +46,7 @@ const router = createBrowserRouter([
           {
             path: 'new',
             element: <NewEventPage />,
+            action: sendData,
           },
         ],
       },
