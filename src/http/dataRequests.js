@@ -26,6 +26,8 @@ export async function getDatabyId({ request, params }) {
 
 // action - send the data
 export async function sendData({ request, params }) {
+  const method = request.method;
+
   const data = await request.formData();
   const eventData = {
     title: data.get('title'),
@@ -33,9 +35,17 @@ export async function sendData({ request, params }) {
     date: data.get('date'),
     description: data.get('description'),
   };
+
+  let url = 'http://localhost:8080/events';
+
+  if (method === 'PATCH') {
+    const id = params.eventId;
+
+    url = 'http://localhost:8080/events/' + id;
+  }
   console.log(eventData);
-  const res = await fetch('http://localhost:8080/events', {
-    method: 'POST',
+  const res = await fetch(url, {
+    method: method,
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(eventData),
   });
