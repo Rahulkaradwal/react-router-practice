@@ -1,7 +1,8 @@
 import React from 'react';
+import EventForm from '../components/EventForm';
 
 function EditEventPage() {
-  return <div>EditEventPage</div>;
+  return <EventForm />;
 }
 
 export default EditEventPage;
