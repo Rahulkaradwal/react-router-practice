@@ -26,7 +26,6 @@ export async function getDatabyId({ request, params }) {
 
 // action - send the data
 export async function sendData({ request, params }) {
-  console.log('in the action');
   const data = await request.formData();
   const eventData = {
     title: data.get('title'),
@@ -43,6 +42,18 @@ export async function sendData({ request, params }) {
 
   if (!res.ok) {
     throw json({ message: 'Couldnot save event' }, { status: 500 });
+  }
+  return redirect('/events');
+}
+
+// action - get the data by id
+export async function deleteDatabyId({ request, params }) {
+  const id = params.eventId;
+  const res = await fetch('http://localhost:8080/events/' + id, {
+    method: request.method,
+  });
+  if (!res.ok) {
+    throw json({ message: 'Could not delete the event' }, { status: 500 });
   }
   return redirect('/events');
 }

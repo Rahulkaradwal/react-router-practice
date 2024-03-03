@@ -7,7 +7,12 @@ import HomePage from './pages/HomePage';
 import RootLayout from './pages/RootLayout';
 import EventsRoot from './pages/EventsRoot';
 import Error from './components/Error';
-import { getData, getDatabyId, sendData } from './http/dataRequests';
+import {
+  deleteDatabyId,
+  getData,
+  getDatabyId,
+  sendData,
+} from './http/dataRequests';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -35,6 +40,7 @@ const router = createBrowserRouter([
               {
                 index: true,
                 element: <EventDetailPage />,
+                action: deleteDatabyId,
               },
               {
                 path: 'edit',
